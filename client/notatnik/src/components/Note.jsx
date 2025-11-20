@@ -4,9 +4,17 @@ import React from 'react'
 
 const Note = ({data}) => {
 
-  const title = data.title;
-  const content = data.content;
+  let title = data.title;
+  let content = data.content;
   const color = data.color;
+
+  // Deafultowe własności title i content
+  if (title === undefined) {
+    title = "Brak tytułu";
+  }
+  if (content === undefined) {
+    content = "Brak treści";
+  }
 
   return (
     <div className='note-box' style={{ backgroundColor: color }}>
