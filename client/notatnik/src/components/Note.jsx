@@ -6,6 +6,9 @@ const Note = () => {
   return (
     <div className='note-box'>
         <h2>Tytuł notatki</h2>
+        <hr/>
+        <p>Zawartość notatki</p>
+        <button className='button-note'>Usuń notatkę</button>
     </div>
   )
 }
