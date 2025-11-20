@@ -9,8 +9,10 @@ function App() {
 
   return (
     <>
+    <div className="box">
       <ListOfNotes data={formData} setFormData={setFormData}/>
       <Form onSubmitData={newNote => setFormData(prev => [...prev, newNote])}/>
+    </div>
     </>
   )
 }
