@@ -22,11 +22,10 @@ const Form = ({onSubmitData}) => {
     // Konwersja FormData na obiekt
     const dataObject = Object.fromEntries(formData.entries());
 
-    // Wysyłanie danych do App (rodzica -> komponentu nadrzędnego)
-    onSubmitData(dataObject);
 
-    const title = formData.get('title');
-    const content = formData.get('content');
+
+    const title = dataObject.title;
+    const content = dataObject.content;
     const color = document.querySelector('.palette').classList[1];
     
     // Jeśli pola są puste, wyświetl alert
@@ -40,7 +39,8 @@ const Form = ({onSubmitData}) => {
     console.log('Kolor:', color);
 
     // Wyślij dane do komponentu Note
-
+    onSubmitData({ title, content, color });
+    
     // Resetowanie formularza po wysłaniu
     resetForm();
     }

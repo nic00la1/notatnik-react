@@ -4,8 +4,8 @@ import React from 'react'
 
 const Note = ({data}) => {
 
-  const title = JSON.stringify(data, null, 2);
-  const content = JSON.stringify(data, null, 2);
+  const title = data.title;
+  const content = data.content;
 
   return (
     <div className='note-box'>
