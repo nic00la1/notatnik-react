@@ -1,9 +1,6 @@
 import '../styles/Form.css'
-import React, { useState } from 'react'
 
 const Form = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
 
   // Paleta kolorów - funkcja
   function button () {
@@ -21,7 +18,11 @@ const Form = () => {
   function handleSubmit(e) {
     e.preventDefault(); // Zapobiega przeładowaniu strony
 
-    const color = document.querySelector('.palette').classList[0];
+    const formData = new FormData(e.target);
+
+    const title = formData.get('title');
+    const content = formData.get('content');
+    const color = document.querySelector('.palette').classList[1];
     
     // Jeśli pola są puste, wyświetl alert
     if (!title || !content || !color) {
@@ -51,19 +52,9 @@ const Form = () => {
         <form onSubmit={handleSubmit}>
             <h1>Formularz dodawania notatki</h1>
             <p>Tytuł</p>
-            <input
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-              type="text"
-              name="title" 
-            />
+            <input type="text"name="title"/>
             <p>Treść</p>
-            <textarea 
-              value={content}
-              name="content"
-              onChange={e => setContent(e.target.value)}
-              type="text">
-            </textarea>
+            <textarea name="content" type="text"/>
             <p>Wybierz kolor notatki</p>
             <div className='colors-container'>
                 <div className='orange button' onClick={button}></div>
