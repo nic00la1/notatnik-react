@@ -9,9 +9,13 @@ function App() {
 
   return (
     <>
-    <div className="box">
-      <ListOfNotes data={formData} setFormData={setFormData}/>
-      <Form onSubmitData={newNote => setFormData(prev => [...prev, newNote])}/>
+    <div className="app-container">
+      <div className='notes-section'>
+        <ListOfNotes data={formData} setFormData={setFormData}/>
+      </div>
+      <div className='form-section'>
+        <Form onSubmitData={newNote => setFormData(prev => [...prev, newNote])}/>
+      </div>
     </div>
     </>
   )

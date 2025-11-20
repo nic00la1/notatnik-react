@@ -1,0 +1,23 @@
+.list-of-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+  justify-content: flex-start;
+}
+
+/* Pojedyncza notatka */
+.note-box {
+  width: 220px;
+  min-height: 180px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.note-box:hover {
+  transform: scale(1.03);
+}
+

@@ -1,3 +1,4 @@
+import "../styles/ListOfNotes.css"
 import React from 'react'
 import Note from './Note'
 

@@ -1,4 +1,3 @@
-
 .colors-container {
     display: flex;
 }
@@ -35,3 +34,38 @@
     --note-color: var(--orange); /* domyślny */
 }
 
+/* Prawa część – formularz */
+.form-section {
+  flex: 1; /* węższa część */
+  background-color: #ffffff;
+  border-left: 2px solid #ddd;
+  padding: 30px;
+}
+
+/* Formularz */
+.form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-section input,
+.form-section textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-section button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-section button:hover {
+  background-color: #388e3c;
+}
