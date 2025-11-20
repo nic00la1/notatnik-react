@@ -1,6 +1,6 @@
 import '../styles/Form.css'
 
-const Form = () => {
+const Form = ({onSubmitData}) => {
 
   // Paleta kolorów - funkcja
   function button () {
@@ -14,11 +14,16 @@ const Form = () => {
     });
   }
 
-  // Formularz - przekazywanie danych
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault(); // Zapobiega przeładowaniu strony
 
     const formData = new FormData(e.target);
+
+    // Konwersja FormData na obiekt
+    const dataObject = Object.fromEntries(formData.entries());
+
+    // Wysyłanie danych do App (rodzica -> komponentu nadrzędnego)
+    onSubmitData(dataObject);
 
     const title = formData.get('title');
     const content = formData.get('content');
@@ -47,14 +52,15 @@ const Form = () => {
     palette.className = 'palette'; // Reset koloru
   }
 
+
   return (
     <div>
         <form onSubmit={handleSubmit}>
             <h1>Formularz dodawania notatki</h1>
             <p>Tytuł</p>
-            <input type="text"name="title"/>
+            <input type="text" name="title" placeholder='Wpisz tytuł notatki'/>
             <p>Treść</p>
-            <textarea name="content" type="text"/>
+            <textarea type="text" name="content"placeholder='Wpisz zawartość notatki'/>
             <p>Wybierz kolor notatki</p>
             <div className='colors-container'>
                 <div className='orange button' onClick={button}></div>
@@ -64,7 +70,7 @@ const Form = () => {
                 <div className='yellow button' onClick={button}></div>
             </div>
             <div className='palette'></div>
-            <button>Dodaj notatkę</button>
+            <button type='submit'>Dodaj notatkę</button>
         </form>
     </div>
   )
