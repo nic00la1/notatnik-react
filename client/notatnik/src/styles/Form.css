@@ -1,0 +1,46 @@
+
+.colors-container {
+    display: flex;
+}
+
+.button {
+    margin: 0.2rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.palette {
+    margin: 1rem 0 0 0;
+    height: 1rem;
+    width: 10rem;
+    border-radius:10px;
+}
+
+.orange {
+    background-color: orange;
+    color: white;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+.red {
+    background-color: red;
+    color: white;
+}
+
+.green {
+    background-color: green;
+    color: white;
+}
+
+.yellow {
+    background-color: yellow;
+    color: black;
+}
+
+
