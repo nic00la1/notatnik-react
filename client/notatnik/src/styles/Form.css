@@ -16,31 +16,22 @@
     height: 1rem;
     width: 10rem;
     border-radius:10px;
+    background: var(--note-color);
 }
 
-.orange {
-    background-color: orange;
-    color: white;
-}
+.orange { background: var(--orange); }
+.blue   { background: var(--blue); }
+.red    { background: var(--red); }
+.green  { background: var(--green); }
+.yellow { background: var(--yellow); }
 
-.blue {
-    background-color: blue;
-    color: white;
-}
+:root {
+    --orange: #ff9a3c;
+    --blue: #4fa3ff;
+    --red: #ff4f4f;
+    --green: #4cd964;
+    --yellow: #ffe14f;
 
-.red {
-    background-color: red;
-    color: white;
+    --note-color: var(--orange); /* domyślny */
 }
-
-.green {
-    background-color: green;
-    color: white;
-}
-
-.yellow {
-    background-color: yellow;
-    color: black;
-}
-
 

@@ -6,9 +6,10 @@ const Note = ({data}) => {
 
   const title = data.title;
   const content = data.content;
+  const color = data.color;
 
   return (
-    <div className='note-box'>
+    <div className='note-box' style={{ backgroundColor: color }}>
         <div className='small-triangle'></div>
         <h2>{title}</h2>
         <hr/>

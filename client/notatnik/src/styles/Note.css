@@ -6,6 +6,7 @@
     padding: 10px;
     overflow-y: auto;
     position: relative;
+    background-color: var(--note-color);
 }
 
 .note-box h2 {
@@ -14,12 +15,13 @@
 }
 
 .small-triangle {
-    background-color: tomato;
-    border-right: 50px solid transparent;
-    border-bottom: 50px solid white;
+    width: 0;
+    height: 0;
     position: absolute;
     top: 0;
     right: calc(1% - 5px);
+    border-right: 50px solid tomato;
+    border-bottom: 50px solid transparent;  /* Zmieniaj mały kwadracik ,*/
 }
 
 .button-note {
@@ -33,4 +35,21 @@
     position: absolute;
     right: 10px;
     bottom: 10px;
+}
+
+.orange { background: var(--orange); }
+.blue   { background: var(--blue); }
+.red    { background: var(--red); }
+.green  { background: var(--green); }
+.yellow { background: var(--yellow); }
+
+
+:root {
+    --orange: #ff9a3c;
+    --blue: #4fa3ff;
+    --red: #ff4f4f;
+    --green: #4cd964;
+    --yellow: #ffe14f;
+
+    --note-color: var(--orange); /* domyślny */
 }

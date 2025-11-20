@@ -8,8 +8,12 @@ const Form = ({onSubmitData}) => {
     const buttons = document.querySelectorAll('.button');
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
-            const color = btn.classList[0];
-            palette.className = 'palette ' + color;
+            const colorValue = getComputedStyle(btn).backgroundColor; // Pobiera kolor tła klikniętego przycisku 
+            const colorClass = btn.classList[0]; // Pobiera klasę koloru klikniętego przycisku
+
+            
+            palette.style.setProperty('--note-color', colorValue); // Ustawia kolor notatki w palecie
+            palette.className = 'palette ' + colorClass; // Ustawia klasę palety na wybrany kolor
         });
     });
   }
@@ -21,8 +25,6 @@ const Form = ({onSubmitData}) => {
 
     // Konwersja FormData na obiekt
     const dataObject = Object.fromEntries(formData.entries());
-
-
 
     const title = dataObject.title;
     const content = dataObject.content;
