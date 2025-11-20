@@ -41,7 +41,12 @@ const Form = ({onSubmitData}) => {
     console.log('Kolor:', color);
 
     // Wyślij dane do komponentu Note
-    onSubmitData({ title, content, color });
+    onSubmitData({
+        id: crypto.randomUUID(), // Unikalne ID podczas tworzenia nowej notatki 
+        title,
+        content,
+        color 
+      });
     
     // Resetowanie formularza po wysłaniu
     resetForm();
