@@ -2,21 +2,15 @@ import '../styles/Note.css'
 
 const Note = ({item, data, setFormData}) => {
 
-  let title = item.title;
-  let content = item.content;
+  let title = item.title || "Brak tytułu";
+  let content = item.content || "Brak treści";
   const color = item.color;
 
-  // Deafultowe własności title i content
-  if (title === undefined) {
-    title = "Brak tytułu";
-  }
-  if (content === undefined) {
-    content = "Brak treści";
-  }
-
-  function handleDelete(item) {
-    console.log("Delete button clicked", item);
-    setFormData( data.filter((note) => note !== item));
+  function handleDelete(id) {
+    console.log("Delete button clicked", id);
+    const updated = data.filter((note) => note.id !== id); 
+    setFormData(updated);
+    localStorage.setItem('notes', JSON.stringify(updated)); // Aktualizacja localStorage
   }
 
   return (
@@ -28,7 +22,7 @@ const Note = ({item, data, setFormData}) => {
           <hr/>
           <p>{content}</p>
           <button className='button-note'
-           onClick={() => handleDelete(item)}
+           onClick={() => handleDelete(item.id)}
            >Usuń notatkę</button>
         </div>
     </div>

@@ -35,18 +35,16 @@ const Form = ({onSubmitData}) => {
         alert('Proszę wypełnić wszystkie pola formularza.');
         return;
     }
-   
-    console.log('Tytuł:', title);
-    console.log('Treść:', content);
-    console.log('Kolor:', color);
 
     // Wyślij dane do komponentu Note
-    onSubmitData({
-        id: crypto.randomUUID(), // Unikalne ID podczas tworzenia nowej notatki 
-        title,
-        content,
-        color 
-      });
+    const newNote = {
+      id: crypto.randomUUID(), // Unikalne ID podczas tworzenia nowej notatki 
+      title,
+      content,
+      color 
+    }
+
+    onSubmitData(newNote);
     
     // Resetowanie formularza po wysłaniu
     resetForm();

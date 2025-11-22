@@ -21,3 +21,18 @@
   transform: scale(1.03);
 }
 
+.p-lack-of-notes {
+    font-size: 50px;
+}
+
+.lack-of-notes {
+    background-color: red;   
+    color: white;
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+}
+
+span {
+    font-size: 25px;
+}
