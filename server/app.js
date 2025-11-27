@@ -13,15 +13,45 @@ const connection = mysql.createConnection({
     database: 'notatnik'
 });
 
+// Łączenie się z bazą danych
 connection.connect((err) => {
     if(err) throw err;
     console.log('Connected to Database!');
 })
 
-app.listen(3001, () => {
-    console.log("Server port: 3001");
+// Pobieranie wszystkich notatek
+app.get('/notatki', (req, res) => {
+    connection.query('SELECT * FROM notatki', (err, results) => {
+        if(err) return res.status(500).send(err);
+        res.json(results);
+    })
 })
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+// Dodawanie jednej notatki
+app.post('/notatki', (req, res) => {
+    const { Tytul, Zawartosc, Kolor, Data} = req.body;
+    connection.query(
+        'INSERT INTO notatki (Tytul, Zawartosc, Kolor, Data) VALUES (?, ?, ?, ?)',
+        [Tytul, Zawartosc, Kolor, Data],
+        (err, result) => {
+            if(err) {
+                return res.status(500).send(err);
+            }
+            res.json({ message: 'Notatka dodana!', id: result.insertId });
+        }
+    )
+})
+
+// Usuwanie notatki
+app.delete('notatki/:id', (req, res) => {
+    const { id } = req.params;
+    connection.query('DELETE FROM notatki WHERE Id = ?', [id], (err, result) => {
+        if(err) return res.status(500).send(err);
+        res.json({ message: 'Notatka usunięta!' });
+    });
+})
+
+// Nasłuchiwanie portu
+app.listen(3001, () => {
+    console.log("Server port: 3001");
 })

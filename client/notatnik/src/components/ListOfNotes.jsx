@@ -2,7 +2,7 @@ import "../styles/ListOfNotes.css"
 import React from 'react'
 import Note from './Note'
 
-const ListOfNotes = ({data, setFormData}) => {
+const ListOfNotes = ({data, onDelete}) => {
   return (
     <div className='list-of-notes'>
       {
@@ -13,10 +13,10 @@ const ListOfNotes = ({data, setFormData}) => {
           </div>
         ) : (
         data.map((item => (
-            <Note key={item.id}
+            <Note key={item.Id}
                   item={item} 
                   data={data} 
-                  setFormData={setFormData}/>
+                  onDelete={onDelete}/>
         )))
       )}
     </div>

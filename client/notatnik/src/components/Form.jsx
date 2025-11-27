@@ -26,22 +26,23 @@ const Form = ({onSubmitData}) => {
     // Konwersja FormData na obiekt
     const dataObject = Object.fromEntries(formData.entries());
 
-    const title = dataObject.title;
-    const content = dataObject.content;
-    const color = document.querySelector('.palette').classList[1];
+    const Tytul = dataObject.title;
+    const Zawartosc = dataObject.content;
+    const Kolor = document.querySelector('.palette').classList[1];
+    const Data = new Date().toISOString().slice(0, 10); // dzisiejsza data YYYY-MM-DD
     
     // Jeśli pola są puste, wyświetl alert
-    if (!title || !content || !color) {
+    if (!Tytul || !Zawartosc || !Kolor) {
         alert('Proszę wypełnić wszystkie pola formularza.');
         return;
     }
 
-    // Wyślij dane do komponentu Note
+    // Obiekt zgodny z backendem
     const newNote = {
-      id: crypto.randomUUID(), // Unikalne ID podczas tworzenia nowej notatki 
-      title,
-      content,
-      color 
+      Tytul,
+      Zawartosc,
+      Kolor,
+      Data 
     }
 
     onSubmitData(newNote);

@@ -1,28 +1,23 @@
 import '../styles/Note.css'
 
-const Note = ({item, data, setFormData}) => {
+const Note = ({item, onDelete}) => {
 
-  let title = item.title || "Brak tytułu";
-  let content = item.content || "Brak treści";
-  const color = item.color;
-
-  function handleDelete(id) {
-    console.log("Delete button clicked", id);
-    const updated = data.filter((note) => note.id !== id); 
-    setFormData(updated);
-    localStorage.setItem('notes', JSON.stringify(updated)); // Aktualizacja localStorage
-  }
+  const title = item.Tytul || "Brak tytułu";
+  const content = item.Zawartosc || "Brak treści";
+  const color = item.Kolor || "#fff";
+  const date = item.data || "";
 
   return (
     
     <div className='note-box' style={{ backgroundColor: color }}>
         <div>
           <div className='small-triangle'></div>
+          <p>{date}</p>
           <h2>{title}</h2>
           <hr/>
           <p>{content}</p>
           <button className='button-note'
-           onClick={() => handleDelete(item.id)}
+           onClick={() => onDelete(item.Id)}
            >Usuń notatkę</button>
         </div>
     </div>
