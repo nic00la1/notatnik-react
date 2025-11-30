@@ -1,11 +1,11 @@
 import '../styles/Note.css'
 
-const Note = ({item, onDelete}) => {
+const Note = ({item, onDelete, onUpdate}) => {
 
   const title = item.Tytul || "Brak tytułu";
   const content = item.Zawartosc || "Brak treści";
   const color = item.Kolor || "#fff";
-  const date = item.data || "";
+  const date = item.Data ? new Date(item.Data).toLocaleDateString('pl-PL') : "";
 
   return (
     
@@ -16,7 +16,10 @@ const Note = ({item, onDelete}) => {
           <h2>{title}</h2>
           <hr/>
           <p>{content}</p>
-          <button className='button-note'
+          <button className='button-update-note'
+           onClick={() => onUpdate(item.Id)}
+           >Edytuj notatkę</button>
+          <button className='button-delete-note'
            onClick={() => onDelete(item.Id)}
            >Usuń notatkę</button>
         </div>

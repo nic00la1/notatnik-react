@@ -25,10 +25,23 @@
     border-bottom: 50px solid transparent;  /* Zmieniaj mały kwadracik ,*/
 }
 
-.button-note {
+.button-update-note {
     display: block;
-    padding: 10px 20px;
+    padding: 10px 15px;
     background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 120px;
+    bottom: 10px;
+}
+
+.button-delete-note {
+    display: block;
+    padding: 10px 15px;
+    background-color: #c70a0a;
     color: white;
     border: none;
     border-radius: 5px;

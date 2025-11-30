@@ -40,11 +40,33 @@ function App() {
     .catch(err => console.error(err));
   };
 
+  const handleUpdateNote = (id, updatedNote) => {
+  fetch(`http://localhost:3001/notatki/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updatedNote)
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Błąd aktualizacji");
+    return res.json();
+  })
+  .then(() => {
+    setFormData(prev =>
+      prev.map(note => note.Id === id ? { ...note, ...updatedNote } : note)
+    );
+  })
+  .catch(err => console.error(err));
+};
+
+
   return (
     <>
     <div className="app-container">
       <div className='notes-section'>
-        <ListOfNotes data={formData} setFormData={setFormData} onDelete={handleDeleteNote}/>
+        <ListOfNotes data={formData} 
+        setFormData={setFormData} 
+        onDelete={handleDeleteNote}
+        onUpdate={handleUpdateNote}/>
       </div>
       <div className='form-section'>
         <Form onSubmitData={handleAddNote}/>

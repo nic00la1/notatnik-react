@@ -2,7 +2,7 @@ import "../styles/ListOfNotes.css"
 import React from 'react'
 import Note from './Note'
 
-const ListOfNotes = ({data, onDelete}) => {
+const ListOfNotes = ({data, onDelete, onUpdate}) => {
   return (
     <div className='list-of-notes'>
       {
@@ -16,7 +16,8 @@ const ListOfNotes = ({data, onDelete}) => {
             <Note key={item.Id}
                   item={item} 
                   data={data} 
-                  onDelete={onDelete}/>
+                  onDelete={onDelete}
+                  onUpdate={onUpdate}/>
         )))
       )}
     </div>

@@ -1,21 +1,25 @@
+:root {
+  --orange: #ff9a3c;
+  --blue: #4fa3ff;
+  --red: #ff4f4f;
+  --green: #4cd964;
+  --yellow: #ffe14f;
+}
+
 .colors-container {
-    display: flex;
+  display: flex;
 }
 
 .button {
-    margin: 0.2rem;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    cursor: pointer;
+  margin: 0.2rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-.palette {
-    margin: 1rem 0 0 0;
-    height: 1rem;
-    width: 10rem;
-    border-radius:10px;
-    background: var(--note-color);
+.button.selected {
+  outline: 3px solid #333; 
 }
 
 .orange { background: var(--orange); }
@@ -24,25 +28,22 @@
 .green  { background: var(--green); }
 .yellow { background: var(--yellow); }
 
-:root {
-    --orange: #ff9a3c;
-    --blue: #4fa3ff;
-    --red: #ff4f4f;
-    --green: #4cd964;
-    --yellow: #ffe14f;
-
-    --note-color: var(--orange); /* domyślny */
+.palette {
+  margin: 1rem 0 0 0;
+  height: 1rem;
+  width: 10rem;
+  border-radius: 10px;
+  background-color: #eee; /* domyślnie szare tło */
 }
 
-/* Prawa część – formularz */
+/* Formularz */
 .form-section {
-  flex: 1; /* węższa część */
+  flex: 1;
   background-color: #ffffff;
   border-left: 2px solid #ddd;
   padding: 30px;
 }
 
-/* Formularz */
 .form-section form {
   display: flex;
   flex-direction: column;
