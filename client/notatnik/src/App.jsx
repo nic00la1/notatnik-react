@@ -18,7 +18,9 @@ function App() {
         ...note,
         Data: note.Data ? note.Data.slice(0, 10) : ""
       }));
-      setNotes(normalised);
+      // od razu posortuj malejąco (najnowsze na górze)
+      const sorted = [...normalised].sort((a, b) => new Date(b.Data) - new Date(a.Data));
+      setNotes(sorted);
     })
     .catch(err => console.error(err));
 }, []);
