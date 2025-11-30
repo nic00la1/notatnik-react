@@ -21,23 +21,35 @@ connection.connect((err) => {
 
 // Pobieranie wszystkich notatek
 app.get('/notatki', (req, res) => {
-    connection.query('SELECT * FROM notatki', (err, results) => {
+    connection.query(
+        `SELECT Id AS id, Tytul, Zawartosc, Kolor, DATE_FORMAT(Data, '%Y-%m-%d') AS Data  FROM notatki`, 
+        (err, results) => {
         if(err) return res.status(500).send(err);
         res.json(results);
     })
 })
 
-// Dodawanie jednej notatki
+// Dodawanie jednej notatki 
 app.post('/notatki', (req, res) => {
     const { Tytul, Zawartosc, Kolor, Data} = req.body;
-    connection.query(
-        'INSERT INTO notatki (Tytul, Zawartosc, Kolor, Data) VALUES (?, ?, ?, ?)',
-        [Tytul, Zawartosc, Kolor, Data],
-        (err, result) => {
+    const sql = 'INSERT INTO notatki (Tytul, Zawartosc, Kolor, Data) VALUES (?, ?, ?, ?)';
+
+    connection.query(sql, [Tytul, Zawartosc, Kolor, Data], (err, result) => {
             if(err) {
                 return res.status(500).send(err);
             }
-            res.json({ message: 'Notatka dodana!', id: result.insertId });
+
+            // Pobiera nowo dodaną notatki
+            connection.query(
+                'SELECT Id AS id, Tytul, Zawartosc, Kolor, Data FROM notatki WHERE Id = ?',
+                [result.insertId],
+                (err2, rows) => {
+                    if (err2) {
+                        return res.status(500).send(err2);
+                    }
+                    res.json(rows[0]) // zwraca pełny obiekt notaki
+                }
+            );
         }
     )
 })
@@ -58,7 +70,7 @@ app.delete('/notatki/:id', (req, res) => {
 });
 
 // Aktualizacja notatki po Id
-app.put('notatki/:id', (req, res) => {
+app.put('/notatki/:id', (req, res) => {
     const { id } = req.params;
     const { Tytul, Zawartosc, Kolor, Data } = req.body;
 

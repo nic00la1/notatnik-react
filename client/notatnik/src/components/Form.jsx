@@ -1,14 +1,27 @@
+import { useEffect } from 'react';
 import '../styles/Form.css'
 import { useState } from 'react';
 
-const Form = ({onSubmitData, editNote, onUpdate}) => {
-  // Jeśli edytujemy, ustawiamy wartości startowe z notatki
-    const [formData, setFormData] = useState(() => ({
-      title: editNote ? editNote.Tytul : '',
-      content: editNote ? editNote.Zawartosc : '',
-      color: editNote ? editNote.Kolor : '',
-      date: editNote && editNote.Data ? editNote.Data.slice(0,10) : ''
-  }));
+const Form = ({ onSubmitData, editNote, onUpdate }) => {
+    const [formData, setFormData] = useState({
+      title: '',
+      content: '',
+      color: '',
+      date: ''
+  });
+
+  // Aktualizacja pól formularzam gdy zmienia się editNote
+  useEffect(() => {
+    if (editNote) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setFormData({
+        title: editNote.Tytul || '',
+        content: editNote.Zawartosc || '',
+        color: editNote.Kolor || '',
+        date: editNote.Data ? editNote.Data.slice(0, 10) : ''
+      });
+    }
+  }, [editNote])
 
   
   const handleChange = (e) => {
@@ -18,30 +31,27 @@ const Form = ({onSubmitData, editNote, onUpdate}) => {
   const handleSubmit = (e) => {
     e.preventDefault(); // Zapobiega przeładowaniu strony
 
-    const formDataObj = new FormData(e.target);
+    const { title, content, color, date } = formData;
 
-    // Konwersja FormData na obiekt
-    const dataObject = Object.fromEntries(formDataObj.entries());
-
-    const Tytul = dataObject.title;
-    const Zawartosc = dataObject.content;
-    const Kolor = formData.color;
-    const Data =  editNote
-      ? formData.date // zachowujemy datę z notatki przy edycji
-      : new Date().toISOString().slice(0, 10); // bieżąca data przy dodawaniu
-    
     // Jeśli pola są puste, wyświetl alert
-    if (!Tytul || !Zawartosc || !Kolor) {
+    if (!title || !content || !color) {
         alert('Proszę wypełnić wszystkie pola formularza.');
         return;
     }
 
+    const localDate = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+
     // Obiekt zgodny z backendem
-    const newNote = { Tytul, Zawartosc, Kolor, Data }
+    const newNote = { 
+      Tytul : title,
+      Zawartosc : content,
+      Kolor : color,
+      Data:  date || localDate
+    }
 
     if (editNote) {
       // tryb edycji
-      onUpdate(editNote.Id, newNote);
+      onUpdate(editNote.id, newNote);
     } else {
       // tryb dodawania
       onSubmitData(newNote);

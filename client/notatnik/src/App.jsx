@@ -5,15 +5,22 @@ import Note from './components/Note'
 import ListOfNotes from './components/ListOfNotes';
 
 function App() {
-  const [formData, setFormData] = useState([]);
+  const [notes, setNotes] = useState([]); 
+  const [editNote, setEditNote] = useState(null);
 
   // Wczytaj notatki z backendu
-  useEffect(() => {
+ useEffect(() => {
   fetch('http://localhost:3001/notatki')
     .then(res => res.json())
-    .then(data => setFormData(data))
+    .then(data => {
+      const normalised = data.map(note => ({
+        ...note,
+        Data: note.Data ? note.Data.slice(0, 10) : ""
+      }));
+      setNotes(normalised);
+    })
     .catch(err => console.error(err));
-  }, []);
+}, []);
 
   // Funkcja dodająca notatkę
   const handleAddNote = (newNote) => {
@@ -23,8 +30,8 @@ function App() {
       body: JSON.stringify(newNote) // {Tytul, Zawartosc, Kolor, Data}
     })
     .then(res => res.json())
-    .then((res) => {
-      setFormData(prev => [...prev, {Id: res.id, ...newNote}]);
+    .then((data) => {
+      setNotes(prev => [...prev, data])
     })
     .catch(err => console.error(err));
   };
@@ -34,9 +41,7 @@ function App() {
     fetch(`http://localhost:3001/notatki/${id}`, {
       method: 'DELETE'
     })
-    .then(() => {
-      setFormData(prev => prev.filter(note => note.Id !== id));
-    })
+    .then(() => setNotes(prev => prev.filter(note => note.id !== id)))
     .catch(err => console.error(err));
   };
 
@@ -46,30 +51,36 @@ function App() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(updatedNote)
   })
-  .then(res => {
-    if (!res.ok) throw new Error("Błąd aktualizacji");
-    return res.json();
-  })
+  .then(res => res.json())
   .then(() => {
-    setFormData(prev =>
-      prev.map(note => note.Id === id ? { ...note, ...updatedNote } : note)
+    setNotes(prev =>
+      prev.map(note =>
+        note.id === id ? { ...note, ...updatedNote} : note
+      )
     );
+    setEditNote(null); // zamyka tryb edycji po zapisaniu
   })
   .catch(err => console.error(err));
-};
+  };
 
+  const handleEditClick = (note) => {
+    setEditNote(note) // ustawia notatkę do edycji
+  }
 
   return (
     <>
     <div className="app-container">
       <div className='notes-section'>
-        <ListOfNotes data={formData} 
-        setFormData={setFormData} 
-        onDelete={handleDeleteNote}
-        onUpdate={handleUpdateNote}/>
+        <ListOfNotes 
+          data={notes} 
+          onDelete={handleDeleteNote}
+          onUpdate={handleEditClick}/>
       </div>
       <div className='form-section'>
-        <Form onSubmitData={handleAddNote}/>
+        <Form 
+          onSubmitData={handleAddNote}
+          editNote={editNote}
+          onUpdate={handleUpdateNote}/>
       </div>
     </div>
     </>

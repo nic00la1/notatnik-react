@@ -16,12 +16,18 @@ const Note = ({item, onDelete, onUpdate}) => {
           <h2>{title}</h2>
           <hr/>
           <p>{content}</p>
-          <button className='button-update-note'
-           onClick={() => onUpdate(item.Id)}
-           >Edytuj notatkę</button>
-          <button className='button-delete-note'
-           onClick={() => onDelete(item.Id)}
-           >Usuń notatkę</button>
+          <button 
+            className='button-update-note'
+            onClick={() => onUpdate(item)}
+          >
+            Edytuj notatkę
+          </button>
+          <button 
+            className='button-delete-note'
+            onClick={() => onDelete(item.id)}
+           >
+            Usuń notatkę
+          </button>
         </div>
     </div>
   )

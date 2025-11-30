@@ -13,9 +13,8 @@ const ListOfNotes = ({data, onDelete, onUpdate}) => {
           </div>
         ) : (
         data.map((item => (
-            <Note key={item.Id}
+            <Note key={item.id}
                   item={item} 
-                  data={data} 
                   onDelete={onDelete}
                   onUpdate={onUpdate}/>
         )))
