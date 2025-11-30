@@ -52,10 +52,11 @@ const Form = ({ onSubmitData, editNote, onUpdate }) => {
     if (editNote) {
       // tryb edycji
       onUpdate(editNote.id, newNote);
+      resetForm();
     } else {
       // tryb dodawania
       onSubmitData(newNote);
-      resetForm(); // reset tylko przy dodawaniu
+      resetForm();
     }  
   };
 
@@ -110,7 +111,7 @@ const Form = ({ onSubmitData, editNote, onUpdate }) => {
         ></div>
 
       <button type="submit">
-        {editNote ? "Zapisz zmiany" : "Dodaj notatkę"}
+        {editNote ? "Zapisz zeedytowane zmiany" : "Dodaj notatkę"}
       </button>
     </form>
   </div>

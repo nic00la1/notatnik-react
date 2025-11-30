@@ -3,6 +3,7 @@ import './App.css'
 import Form from './components/Form'
 import Note from './components/Note'
 import ListOfNotes from './components/ListOfNotes';
+import SortNotes from './components/SortNotes';
 
 function App() {
   const [notes, setNotes] = useState([]); 
@@ -69,6 +70,7 @@ function App() {
 
   return (
     <>
+    <SortNotes notes={notes} setNotes={setNotes}/>
     <div className="app-container">
       <div className='notes-section'>
         <ListOfNotes 
